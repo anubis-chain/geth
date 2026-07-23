@@ -1,0 +1,5 @@
+/data/
+/geth-data/
+/keystore/
+*.ipc
+*.log
