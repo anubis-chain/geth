@@ -1,0 +1,36 @@
+name: Verify release artifact
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Check binary and provenance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Verify checksum
+        run: sha256sum --check checksums/SHA256SUMS
+
+      - name: Verify executable format
+        run: |
+          test -x geth
+          file geth | grep -q "ELF 64-bit LSB executable, x86-64"
+
+      - name: Inspect embedded Go metadata
+        run: |
+          go version -m geth | tee build-metadata.txt
+          grep -Fq "vcs.revision=1ee6f5ddd9d7d5d61e97f19cc33e0b098556d0ed" build-metadata.txt
+          grep -Fq "vcs.modified=false" build-metadata.txt
+          grep -Fq "GOOS=linux" build-metadata.txt
+          grep -Fq "GOARCH=amd64" build-metadata.txt
+
+      - name: Run version command
+        run: ./geth version
