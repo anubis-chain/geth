@@ -9,6 +9,17 @@ This artifact is an Anubis/BSC-derived client; it is not an unmodified Ethereum 
 
 This is a **binary distribution repository**, not the client source tree. Verify the artifact before running it and review [SOURCE.md](SOURCE.md) for build provenance.
 
+## Downloads
+
+| Channel | Release | Source revision |
+| --- | --- | --- |
+| Stable, same binary as this branch | [`geth-1ee6f5ddd9d7`](https://github.com/anubis-chain/geth/releases/tag/geth-1ee6f5ddd9d7) | `1ee6f5ddd9d7` |
+| Pre-release, for isolated validation | [`geth-2026.11.20-rc.1`](https://github.com/anubis-chain/geth/releases/tag/geth-2026.11.20-rc.1) | `10f78136bfec` |
+
+Each release includes the Linux x86-64 `geth` binary, `SHA256SUMS`, `VERSION`, source-provenance notes, and embedded Go build metadata. Download `geth` and `SHA256SUMS` into the same directory and run `sha256sum --check SHA256SUMS` before use.
+
+The pre-release has a newer embedded source revision and dependency versions. Network compatibility and function validation remain pending; see its release notes for confirmed differences. The binary and manifests on `main` remain at the stable version.
+
 ## Release artifact
 
 | Item | Value |
