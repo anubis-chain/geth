@@ -1,9 +1,11 @@
-# Anubis Chain Geth
+# Anubis Chain Geth — 2026-11-20 pre-release
 
 [![Verify release artifact](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml/badge.svg)](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml)
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](COPYING)
 
-Prebuilt Anubis Chain execution client for running a mainnet full node.
+Candidate Anubis Chain execution client for isolated validation on Linux x86-64. Network compatibility and function validation remain pending.
+
+The stable binary remains on [`main`](https://github.com/anubis-chain/geth) and is preserved in [release `geth-1ee6f5ddd9d7`](https://github.com/anubis-chain/geth/releases/tag/geth-1ee6f5ddd9d7). This candidate is published as [`geth-2026.11.20-rc.1`](https://github.com/anubis-chain/geth/releases/tag/geth-2026.11.20-rc.1).
 
 This artifact is an Anubis/BSC-derived client; it is not an unmodified Ethereum Geth binary.
 
@@ -17,14 +19,16 @@ This is a **binary distribution repository**, not the client source tree. Verify
 | Target | Linux `amd64` / x86-64 |
 | Format | Dynamically linked 64-bit ELF |
 | Go version | `go1.26.1` |
-| Embedded module version | `v1.0.2-0.20260520061237-1ee6f5ddd9d7` |
-| Source revision | `1ee6f5ddd9d7d5d61e97f19cc33e0b098556d0ed` |
+| Embedded module version | `v1.0.2-0.20261117113209-10f78136bfec` |
+| Source revision | `10f78136bfec4a7992970734fac9470a7ccd3c74` |
 | Build tree | Clean (`vcs.modified=false`) |
-| SHA-256 | `7e3f22af504964c00db367d728328aac34b0c880091019fe19861e8cbfaa93de` |
+| SHA-256 | `30b181ccbebed56af0047b0ae30b6e7ec53e0e4fb2f13fcd5e0d401f7f3370b4` |
 
 The artifact does not run natively on macOS or ARM64 Linux.
 
-## Network
+## Expected network
+
+These identifiers describe the existing Anubis mainnet. Verify that the candidate connects to the expected network during isolated validation.
 
 | Item | Value |
 | --- | --- |
@@ -37,7 +41,7 @@ The public RPC is useful for comparison and light queries. Run your own node for
 ## Download
 
 ```bash
-git clone --depth 1 https://github.com/anubis-chain/geth.git
+git clone --depth 1 --branch geth-2026.11.20-rc.1 https://github.com/anubis-chain/geth.git
 cd geth
 chmod +x geth
 ```
@@ -57,10 +61,13 @@ geth: OK
 
 Do not run the binary if the checksum differs.
 
-## Start a mainnet full node
+## Isolated node validation
+
+Use a separate data directory and disposable test environment when validating this candidate. Do not point it at an existing production node's database. The following command is a starting point for a separate validation node; successful `geth version` output alone does not establish synchronization, consensus, DAI gas, RPC, or database compatibility.
 
 ```bash
 ./geth \
+  --datadir ./geth-candidate-data \
   --mainnet \
   --miner.gasprice 12000000000 \
   --http \

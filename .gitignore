@@ -1,5 +1,6 @@
 /data/
 /geth-data/
+/geth-candidate-data/
 /keystore/
 *.ipc
 *.log
