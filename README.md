@@ -1,6 +1,6 @@
 # Anubis Chain Geth — 2026-11-20 pre-release
 
-[![Verify release artifact](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml/badge.svg)](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml)
+[![Verify release artifact](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml/badge.svg?branch=release%2Fgeth-20261120)](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml)
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](COPYING)
 
 Candidate Anubis Chain execution client for isolated validation on Linux x86-64. Network compatibility and function validation remain pending.
