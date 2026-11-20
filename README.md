@@ -3,7 +3,9 @@
 [![Verify release artifact](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml/badge.svg)](https://github.com/anubis-chain/geth/actions/workflows/verify-binary.yml)
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](COPYING)
 
-Prebuilt Anubis Chain execution client for running a mainnet full node.
+Prebuilt Anubis Chain execution client for Linux x86-64.
+
+`main` contains the updated binary supplied on 2026-11-20, with embedded source revision `10f78136bfec`. Artifact and version checks have passed; node synchronization and function validation remain pending.
 
 This artifact is an Anubis/BSC-derived client; it is not an unmodified Ethereum Geth binary.
 
@@ -13,12 +15,12 @@ This is a **binary distribution repository**, not the client source tree. Verify
 
 | Channel | Release | Source revision |
 | --- | --- | --- |
-| Stable, same binary as this branch | [`geth-1ee6f5ddd9d7`](https://github.com/anubis-chain/geth/releases/tag/geth-1ee6f5ddd9d7) | `1ee6f5ddd9d7` |
-| Pre-release, for isolated validation | [`geth-2026.11.20-rc.1`](https://github.com/anubis-chain/geth/releases/tag/geth-2026.11.20-rc.1) | `10f78136bfec` |
+| Current binary, same as `main` (pre-release) | [`geth-2026.11.20-rc.1`](https://github.com/anubis-chain/geth/releases/tag/geth-2026.11.20-rc.1) | `10f78136bfec` |
+| Previous stable binary | [`geth-1ee6f5ddd9d7`](https://github.com/anubis-chain/geth/releases/tag/geth-1ee6f5ddd9d7) | `1ee6f5ddd9d7` |
 
 Each release includes the Linux x86-64 `geth` binary, `SHA256SUMS`, `VERSION`, source-provenance notes, and embedded Go build metadata. Download `geth` and `SHA256SUMS` into the same directory and run `sha256sum --check SHA256SUMS` before use.
 
-The pre-release has a newer embedded source revision and dependency versions. Network compatibility and function validation remain pending; see its release notes for confirmed differences. The binary and manifests on `main` remain at the stable version.
+Cloning this repository downloads the current binary. See the pre-release notes for confirmed dependency differences and validation status. The previous stable binary remains available from its release.
 
 ## Release artifact
 
@@ -28,10 +30,11 @@ The pre-release has a newer embedded source revision and dependency versions. Ne
 | Target | Linux `amd64` / x86-64 |
 | Format | Dynamically linked 64-bit ELF |
 | Go version | `go1.26.1` |
-| Embedded module version | `v1.0.2-0.20260520061237-1ee6f5ddd9d7` |
-| Source revision | `1ee6f5ddd9d7d5d61e97f19cc33e0b098556d0ed` |
+| Embedded module version | `v1.0.2-0.20261117113209-10f78136bfec` |
+| Source revision | `10f78136bfec4a7992970734fac9470a7ccd3c74` |
+| Source commit time (embedded) | `2026-11-17T11:32:09Z` |
 | Build tree | Clean (`vcs.modified=false`) |
-| SHA-256 | `7e3f22af504964c00db367d728328aac34b0c880091019fe19861e8cbfaa93de` |
+| SHA-256 | `30b181ccbebed56af0047b0ae30b6e7ec53e0e4fb2f13fcd5e0d401f7f3370b4` |
 
 The artifact does not run natively on macOS or ARM64 Linux.
 
@@ -70,8 +73,11 @@ Do not run the binary if the checksum differs.
 
 ## Start a mainnet full node
 
+For validation, use a separate data directory as below. Preserve a compatible backup before upgrading an existing node, and validate synchronization, RPC and DAI gas behavior before production use.
+
 ```bash
 ./geth \
+  --datadir ./geth-data \
   --mainnet \
   --miner.gasprice 12000000000 \
   --http \
