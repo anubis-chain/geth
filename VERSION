@@ -1,9 +1,9 @@
 artifact=geth
 module=github.com/ethereum/go-ethereum
-module_version=v1.0.2-0.20260520061237-1ee6f5ddd9d7
-source_revision=1ee6f5ddd9d7d5d61e97f19cc33e0b098556d0ed
-source_time=2026-05-20T06:12:37Z
+module_version=v1.0.2-0.20261117113209-10f78136bfec
+source_revision=10f78136bfec4a7992970734fac9470a7ccd3c74
+source_time=2026-11-17T11:32:09Z
 source_modified=false
 go_version=go1.26.1
 target=linux/amd64
-sha256=7e3f22af504964c00db367d728328aac34b0c880091019fe19861e8cbfaa93de
+sha256=30b181ccbebed56af0047b0ae30b6e7ec53e0e4fb2f13fcd5e0d401f7f3370b4

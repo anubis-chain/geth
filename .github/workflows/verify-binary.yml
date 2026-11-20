@@ -2,9 +2,10 @@ name: Verify release artifact
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'release/**']
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,8 +14,11 @@ jobs:
   verify:
     name: Check binary and provenance
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: Verify checksum
         run: sha256sum --check checksums/SHA256SUMS
@@ -27,10 +31,18 @@ jobs:
       - name: Inspect embedded Go metadata
         run: |
           go version -m geth | tee build-metadata.txt
-          grep -Fq "vcs.revision=1ee6f5ddd9d7d5d61e97f19cc33e0b098556d0ed" build-metadata.txt
+          expected_revision="$(sed -n 's/^source_revision=//p' VERSION)"
+          expected_module="$(sed -n 's/^module_version=//p' VERSION)"
+          expected_hash="$(sed -n 's/^sha256=//p' VERSION)"
+          test -n "$expected_revision"
+          test -n "$expected_module"
+          test -n "$expected_hash"
+          test "$expected_hash" = "$(sha256sum geth | cut -d ' ' -f 1)"
+          grep -Fq "vcs.revision=$expected_revision" build-metadata.txt
+          grep -Fq "$expected_module" build-metadata.txt
           grep -Fq "vcs.modified=false" build-metadata.txt
           grep -Fq "GOOS=linux" build-metadata.txt
           grep -Fq "GOARCH=amd64" build-metadata.txt
 
-      - name: Run version command
-        run: ./geth version
+      - name: Version smoke test
+        run: timeout 30s ./geth version
