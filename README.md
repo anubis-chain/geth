@@ -5,7 +5,7 @@
 
 Candidate Anubis Chain execution client for isolated validation on Linux x86-64. Network compatibility and function validation remain pending.
 
-The stable binary remains on [`main`](https://github.com/anubis-chain/geth) and is preserved in [release `geth-1ee6f5ddd9d7`](https://github.com/anubis-chain/geth/releases/tag/geth-1ee6f5ddd9d7). This candidate is published as [`geth-2026.11.20-rc.1`](https://github.com/anubis-chain/geth/releases/tag/geth-2026.11.20-rc.1).
+The same candidate binary is available on [`main`](https://github.com/anubis-chain/geth). The previous stable binary is preserved in [release `geth-1ee6f5ddd9d7`](https://github.com/anubis-chain/geth/releases/tag/geth-1ee6f5ddd9d7). This candidate is published as [`geth-2026.11.20-rc.1`](https://github.com/anubis-chain/geth/releases/tag/geth-2026.11.20-rc.1).
 
 This artifact is an Anubis/BSC-derived client; it is not an unmodified Ethereum Geth binary.
 
